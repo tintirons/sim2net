@@ -148,7 +148,7 @@ class Crash(Failure):
             return []
         crashes = [-1] * nodes_number
         crashes_number = 0
-        for node_id in xrange(nodes_number):
+        for node_id in range(nodes_number):
             crash = self.random_generator.uniform(0.0, 1.0)
             if crash <= crash_probability:
                 crashes[node_id] = \
@@ -159,13 +159,13 @@ class Crash(Failure):
                     break
         self.random_generator.random_order(crashes)
         crashed = dict()
-        for node_id in xrange(nodes_number):
+        for node_id in range(nodes_number):
             if crashes[node_id] > 0:
                 crashed[node_id] = int(crashes[node_id])
         assert len(crashed) <= maximum_crash_number, \
             'The number of faulty process (%d) is greater then the maximum' \
             ' value (%d)!' % (len(crashes), maximum_crash_number)
-        return sorted(crashed.iteritems(), key=operator.itemgetter(1))
+        return sorted(crashed.items(), key=operator.itemgetter(1))
 
     def node_failure(self, failures):
         """
