@@ -15,23 +15,15 @@ sending application messages through wireless links.
 
 Installation
 ============
-There are two possibilities to install the **sim2net** simulator: with the use
-of the ``pip`` installation tool, or from the source code obtained from `GitHub
-<https://github.com/mkalewski/sim2net>`_.
+To install this version of **sim2net** simulator:
 
-1. Using the ``pip`` installation tool
---------------------------------------
-.. code-block:: bash
-
-   $ sudo pip install sim2net
-
-2. Manually from the source code
+1. Manually from the source code
 --------------------------------
 Step 1.  Clone the project:
 
 .. code-block:: bash
 
-    $ git clone git@github.com:mkalewski/sim2net.git sim2net
+    $ git clone git@github.com:tintirons/sim2net.git sim2net
     $ cd sim2net
 
 Step 2.  Run install:
