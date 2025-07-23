@@ -1,9 +1,9 @@
 ==================================
-Simple Network Simulator (sim2net)
+Simple Network Simulator (sim2net) for Python3
 ==================================
 
-:Author:  Michał Kalewski
-:Version: 3.1.3
+:Original Author:  Michał Kalewski
+:Version: 3.1.3 (Python3 0.1)
 :Documentation: http://sim2net.readthedocs.org/en/latest/
 :License: MIT License
 
