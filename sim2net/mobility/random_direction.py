@@ -37,11 +37,9 @@ The speed and destination of each node are chosen independently of other nodes.
    2001), pp. 857--861, vol. 3.  Helsinki, Finland, June 2001.
 """
 
-
 from sim2net.mobility._mobility import Mobility
 from sim2net.mobility.random_waypoint import RandomWaypoint
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 
@@ -136,4 +134,5 @@ class RandomDirection(RandomWaypoint, Mobility):
             return (destinations[0], self._area.height)
         elif direction > 1.0:
             return (self._area.width, destinations[1])
-        else: return (destinations[0], 0.0)
+        else:
+            return (destinations[0], 0.0)

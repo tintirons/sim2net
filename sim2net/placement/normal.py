@@ -21,10 +21,8 @@ a given number of nodes are placed over it with the normal, i.e. Gaussian,
 probability distribution.
 """
 
-
 from sim2net.placement._placement import Placement
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 

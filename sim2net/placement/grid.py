@@ -23,12 +23,10 @@ networks that are regular in shape and provides excellent connectivity at a
 startup.
 """
 
-
 from math import modf, sqrt
 
 from sim2net.placement._placement import Placement
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 
@@ -157,9 +155,9 @@ class Grid(Placement):
         """
         coordinates = []
         offset = 0.5 * (self.__area.width - ((columns + 1) * distance))
-        for row in range(0, rows):
+        for row in range(0, int(rows)):
             coordinate = offset
-            for column in range(0, columns):
+            for column in range(0, int(columns)):
                 coordinate = coordinate + distance
                 assert 0 <= coordinate <= self.__area.width, \
                     'The computed horizontal coordinate %f exceeds' \
@@ -178,12 +176,12 @@ class Grid(Placement):
         coordinates = []
         offset = 0.5 * (self.__area.height - ((rows + 1) * distance))
         coordinate = offset
-        for row in range(0, rows):
+        for row in range(0, int(rows)):
             coordinate = coordinate + distance
             assert 0 <= coordinate <= self.__area.height, \
                 'The computed vertical coordinate %f exceeds dimensions' \
                 ' of the simulation area!' % coordinate
-            for column in range(0, columns):
+            for column in range(0, int(columns)):
                 coordinates.append(coordinate)
         return coordinates
 

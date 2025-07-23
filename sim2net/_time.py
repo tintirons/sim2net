@@ -39,7 +39,6 @@ In this module the following terminology is used:
 from sim2net.utility import logger
 from sim2net.utility.validation import check_argument_type
 
-
 __docformat__ = 'reStructuredText'
 
 
@@ -110,7 +109,7 @@ class Time(object):
         """
         self.__logger = logger.get_logger(Time.__name__)
         assert self.__logger is not None, \
-               'A logger object expected but "None" value got!'
+            'A logger object expected but "None" value got!'
         self.__simulation_step = int(-1)
         self.__simulation_time = float(-1.0)
         check_argument_type(Time.__name__, 'simulation_frequency', int,
@@ -184,9 +183,13 @@ class Time(object):
         self.__simulation_step += Time.__SIMULATION_TICK
         self.__simulation_time = \
             self.__simulation_step / self.__simulation_frequency
-        if __debug__ and self.__logger.isEnabledFor('DEBUG'):
-            self.__logger.debug('Tick: the current simulation step is %d' \
-                                ' and the current simulation time is %.9f' %
-                                (self.__simulation_step,
-                                 self.__simulation_time))
+        if __debug__:  # and self.__logger.isEnabledFor('DEBUG')
+            # self.__logger.debug('Tick: the current simulation step is %d' \
+            #                     ' and the current simulation time is %.9f' %
+            #                     (self.__simulation_step,
+            #                      self.__simulation_time))
+            print('Tick: the current simulation step is %d' \
+                  ' and the current simulation time is %.9f' %
+                  (self.__simulation_step,
+                   self.__simulation_time))
         return (self.__simulation_step, self.__simulation_time)

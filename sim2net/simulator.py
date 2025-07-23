@@ -15,20 +15,18 @@
 
 """
 This module provides an interface to the simulator for the :mod:`sim2net.cli`
-command-line tool and it is the main entry point for conducting simulations.
+command-line tool and its main entry point for conducting simulations.
 """
-
 
 import inspect
 import os
 import sys
 
 from sim2net._network import Network
-from sim2net._version import project_information
 from sim2net._time import Time
+from sim2net._version import project_information
 from sim2net.application import Application
 from sim2net.utility import logger
-
 
 __docformat__ = 'reStructuredText'
 
@@ -37,8 +35,8 @@ class Sim2Net(object):
     """
     This class is the main entry point for conducting simulations.
 
-    Based on the given simulation configuration and application files, the
-    class initializes and runs the simulation.
+    Based on the given simulation configuration and application file, the class
+    initializes and runs the simulation.
     """
 
     #:
@@ -87,8 +85,8 @@ class Sim2Net(object):
         environment['area'] = \
             self.__get_element('area', configuration, environment)
         environment['initial_coordinates'] = \
-            self.__get_element('placement', configuration,
-                               environment).get_placement()
+            list(self.__get_element('placement', configuration,
+                                    environment).get_placement())
         for name in Sim2Net.__CONFIGURATION_LISTS:
             environment[name] = \
                 self.__get_element(name, configuration, environment,
@@ -114,7 +112,7 @@ class Sim2Net(object):
         """
         try:
             return configuration[name]
-        except KeyError, err:
+        except KeyError as err:
             self.__report_error('element', err)
 
     def __get_arguments(self, name, configuration):
@@ -125,7 +123,7 @@ class Sim2Net(object):
                 return configuration[name][1]
             else:
                 return dict()
-        except KeyError, err:
+        except KeyError as err:
             self.__report_error('element', err)
 
     def __get_element(self, name, configuration, environment, number=None):
@@ -135,12 +133,12 @@ class Sim2Net(object):
             number = 1
         arguments = self.__get_arguments(name, configuration)
         parameters = \
-            (inspect.getargspec(configuration[name][0].__init__)[0])[1:]
+            (inspect.getfullargspec(configuration[name][0].__init__)[0])[1:]
         marguments = [marg for marg in parameters if marg not in arguments]
         try:
             for marg in marguments:
                 arguments[marg] = environment[marg]
-        except KeyError, err:
+        except KeyError as err:
             self.__report_error('argument', '%s for element "%s"'
                                 % (err, name))
         if number == 1:

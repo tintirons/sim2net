@@ -17,7 +17,6 @@
 Contains a collection of source code validation functions.
 """
 
-
 __docformat__ = 'reStructuredText'
 
 
@@ -60,18 +59,18 @@ def check_argument_type(function, parameter, expected_type, argument,
     if __debug__:
         obj = type(function)
     assert isinstance(function, str), \
-           'In "check_argument_type()": an inappropriate type of the' \
-           ' "function_name" argument, "str" expected but "%s" provided!' \
-           % obj.__name__
+        'In "check_argument_type()": an inappropriate type of the' \
+        ' "function_name" argument, "str" expected but "%s" provided!' \
+        % obj.__name__
     if __debug__:
         obj = type(parameter)
     assert isinstance(parameter, str), \
-           'In "check_argument_type()": an inappropriate type of the' \
-           ' "parameter" argument, "str" expected but "%s" provided!' \
-           % obj.__name__
+        'In "check_argument_type()": an inappropriate type of the' \
+        ' "parameter" argument, "str" expected but "%s" provided!' \
+        % obj.__name__
     assert expected_type is not None, \
-           'In "check_argument_type()": the "expected_type" argument' \
-           ' cannot be "None"!'
+        'In "check_argument_type()": the "expected_type" argument' \
+        ' cannot be "None"!'
     if not isinstance(argument, expected_type):
         obj = type(argument)
         if logger is not None:
@@ -82,5 +81,5 @@ def check_argument_type(function, parameter, expected_type, argument,
         else:
             raise TypeError('In "%s()": an inappropriate type of the "%s"' \
                             ' argument, "%s" expected but "%s" provided' %
-                           (function, parameter, expected_type.__name__,
-                            obj.__name__))
+                            (function, parameter, expected_type.__name__,
+                             obj.__name__))

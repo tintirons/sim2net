@@ -18,17 +18,15 @@ Contains an abstract class that should be implemented by all packet loss model
 classes.
 """
 
-
 from abc import ABCMeta, abstractmethod
 
 from sim2net.utility import logger
 from sim2net.utility.randomness import get_random_generator
 
-
 __docformat__ = 'reStructuredText'
 
 
-#pylint: disable=R0921
+# pylint: disable=R0921
 class PacketLoss(object):
     """
     This class is an abstract class that should be implemented by all packet
@@ -44,11 +42,11 @@ class PacketLoss(object):
         """
         self.__random_generator = get_random_generator()
         assert self.__random_generator is not None, \
-               'A random generator object expected but "None" value got!'
+            'A random generator object expected but "None" value got!'
         self.__logger = \
             logger.get_logger('packet_loss.' + str(name))
         assert self.__logger is not None, \
-               'A logger object expected but "None" value got!'
+            'A logger object expected but "None" value got!'
 
     @property
     def random_generator(self):

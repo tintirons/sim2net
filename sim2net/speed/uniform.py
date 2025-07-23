@@ -19,10 +19,8 @@ speed of a node is assigned at random with the uniform probability
 distribution.
 """
 
-
 from sim2net.speed._speed import Speed
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 

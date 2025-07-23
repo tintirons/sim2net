@@ -18,7 +18,6 @@ This package provides a command-line interface for the **sim2net** simulator,
 which allows users to initialize and start simulations.
 """
 
-
 __docformat__ = 'reStructuredText'
 
 __all__ = ['cli']

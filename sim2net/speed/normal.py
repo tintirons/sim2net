@@ -22,7 +22,6 @@ probability distribution.
 from sim2net.speed._speed import Speed
 from sim2net.utility.validation import check_argument_type
 
-
 __docformat__ = 'reStructuredText'
 
 

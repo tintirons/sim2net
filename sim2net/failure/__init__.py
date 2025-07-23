@@ -36,7 +36,6 @@ algorithm).
    Springer-Verlag, 2011.
 """
 
-
 __docformat__ = 'reStructuredText'
 
 __all__ = ['crash']

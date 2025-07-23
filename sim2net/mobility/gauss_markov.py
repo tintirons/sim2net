@@ -61,12 +61,10 @@ random variables (:math:`v_x` and :math:`d_x`).
    1999), pp. 1377--1384, vol. 3.  New York, NY, United States, March 1999.
 """
 
-
 from math import cos, fabs, pi, sin, sqrt
 
 from sim2net.mobility._mobility import Mobility
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 
@@ -95,7 +93,7 @@ class GaussMarkov(Mobility):
     __DEFAULT_ALPHA = 0.75
 
     #: Default value of the direction standard deviation.
-    __DEFAULT_DIRECTION_DEVIATION = float(pi/2.0)
+    __DEFAULT_DIRECTION_DEVIATION = float(pi / 2.0)
 
     #: Default direction margin used to change the direction mean to ensure
     #: that nodes do not remain near the border of the simulation area for a
@@ -103,8 +101,7 @@ class GaussMarkov(Mobility):
     __DEFAULT_DIRECTION_MARGIN = 0.15
 
     #: Default value of the direction mean.
-    __DEFAULT_DIRECTION_MEAN = float(pi/0.6)
-
+    __DEFAULT_DIRECTION_MEAN = float(pi / 0.6)
 
     def __init__(self, area, time, initial_coordinates, initial_speed,
                  **kwargs):
@@ -204,7 +201,7 @@ class GaussMarkov(Mobility):
             check_argument_type(GaussMarkov.__name__, 'direction_margin',
                                 float, kwargs['direction_margin'], self.logger)
             if kwargs['direction_margin'] < 0.0 \
-               or kwargs['direction_margin'] > 1.0:
+                    or kwargs['direction_margin'] > 1.0:
                 raise ValueError('Keyword parameter "direction_margin": a' \
                                  ' value of the direction margin cannot be' \
                                  ' less than zero and greater than one but' \
@@ -293,18 +290,18 @@ class GaussMarkov(Mobility):
         # direction
         if node_coordinates[1] >= self.__height_top:
             if node_coordinates[0] <= self.__width_left:
-                mean = (7.0/4.0)*pi
+                mean = (7.0 / 4.0) * pi
             elif node_coordinates[0] >= self.__width_right:
-                mean = (5.0/4.0)*pi
+                mean = (5.0 / 4.0) * pi
             else:
-                mean = (3.0/2.0)*pi
+                mean = (3.0 / 2.0) * pi
         elif node_coordinates[1] <= self.__height_bottom:
             if node_coordinates[0] <= self.__width_left:
-                mean = pi/4.0
+                mean = pi / 4.0
             elif node_coordinates[0] >= self.__width_right:
-                mean = (3.0/4.0)*pi
+                mean = (3.0 / 4.0) * pi
             else:
-                mean = pi/2.0
+                mean = pi / 2.0
         elif node_coordinates[0] <= self.__width_left:
             mean = 0.0
         elif node_coordinates[0] >= self.__width_right:
@@ -344,16 +341,16 @@ class GaussMarkov(Mobility):
         horizontal_coordinate = \
             node_coordinates[0] \
             + ((horizontal_coordinate - node_coordinates[0]) \
-                * self.__time.simulation_period)
+               * self.__time.simulation_period)
         if horizontal_coordinate < 0.0:
             horizontal_coordinate = 0.0
             self.__velocities[node_id]['direction'] = \
-                (2.0*pi) - (2.0*self.__velocities[node_id]['direction'])
+                (2.0 * pi) - (2.0 * self.__velocities[node_id]['direction'])
         elif horizontal_coordinate > self.__area.width:
             horizontal_coordinate = \
                 self.__area.width - (horizontal_coordinate - self.__area.width)
             self.__velocities[node_id]['direction'] = \
-                (2.0*pi) - (2.0*self.__velocities[node_id]['direction'])
+                (2.0 * pi) - (2.0 * self.__velocities[node_id]['direction'])
         vertical_coordinate = \
             node_coordinates[1] \
             + (self.__velocities[node_id]['speed'] \
@@ -361,16 +358,16 @@ class GaussMarkov(Mobility):
         vertical_coordinate = \
             node_coordinates[1] \
             + ((vertical_coordinate - node_coordinates[1]) \
-                * self.__time.simulation_period)
+               * self.__time.simulation_period)
         if vertical_coordinate < 0.0:
             vertical_coordinate = 0.0
             self.__velocities[node_id]['direction'] = \
-                (2.0*pi) - (2.0*self.__velocities[node_id]['direction'])
+                (2.0 * pi) - (2.0 * self.__velocities[node_id]['direction'])
         elif vertical_coordinate > self.__area.height:
             vertical_coordinate = \
                 self.__area.height - (vertical_coordinate - self.__area.height)
             self.__velocities[node_id]['direction'] = \
-                (2.0*pi) - (2.0*self.__velocities[node_id]['direction'])
+                (2.0 * pi) - (2.0 * self.__velocities[node_id]['direction'])
         return (horizontal_coordinate, vertical_coordinate)
 
     def get_current_position(self, node_id, node_speed, node_coordinates):
@@ -400,9 +397,9 @@ class GaussMarkov(Mobility):
                       ' the current speed equal to %f and direction equal to' \
                       ' %f'
                 self.logger.debug(msg %
-                    (node_id, node_coordinates[0], node_coordinates[1],
-                     self.__velocities[node_id]['speed'],
-                     self.__velocities[node_id]['direction']))
+                                  (node_id, node_coordinates[0], node_coordinates[1],
+                                   self.__velocities[node_id]['speed'],
+                                   self.__velocities[node_id]['direction']))
             return node_coordinates
         coordinates = self.__step_move(node_id, node_coordinates)
         if __debug__ and self.logger.isEnabledFor('DEBUG'):

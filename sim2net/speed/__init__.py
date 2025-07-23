@@ -29,7 +29,6 @@ in a simulation area (see: :mod:`sim2net.area`).
     of simulation area per one unit of simulation time*.
 """
 
-
 __docformat__ = 'reStructuredText'
 
 __all__ = ['constant', 'normal', 'uniform']

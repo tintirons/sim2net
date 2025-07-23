@@ -29,11 +29,9 @@ maximum transmission time in the *simulation time* units (see:
 :mod:`sim2net._time`).
 """
 
-
 from sim2net.utility import logger
 from sim2net.utility.randomness import get_random_generator
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 
@@ -100,7 +98,7 @@ class _Output(object):
         """
         if transmission_time \
                 <= self.__time.simulation_time + self.__time.simulation_period:
-            if self.__logger.isEnabledFor('DEBUG'):
+            if self.__logger.isEnabledFor(2):
                 self.__logger.debug('Node #%d: transmitting packet %d'
                                     % (self.__node_id, packet_id))
             return neighbors
@@ -206,14 +204,14 @@ class _Output(object):
             losses = [neighbor for neighbor in packet[-1]
                       if self.__packet_loss.packet_loss()]
             packet[-1] = list(set(packet[-1]) - set(losses))
-            if losses and self.__logger.isEnabledFor('DEBUG'):
+            if losses and self.__logger.isEnabledFor(2):
                 msg = 'Node #%d: in accordance with the packet loss model' \
                       ' packet %d was lost during transmission to node(s) #%s'
                 self.__logger.debug(msg %
                                     (self.__node_id, packet[2],
                                      ', #'.join(str(node) for node in losses)))
             if not packet[-1]:
-                if self.__logger.isEnabledFor('DEBUG'):
+                if self.__logger.isEnabledFor(2):
                     msg = 'Node #%d: no neighboring node is able to receive' \
                           ' packet %d'
                     self.__logger.debug(msg % (self.__node_id, packet[2]))
@@ -257,7 +255,7 @@ class _Input(object):
         assert isinstance(packet, tuple) and len(packet) == 2, \
             'Invalid packet has been captured!'
         self.__captured_packets.append(packet[1])
-        if self.__logger.isEnabledFor('DEBUG'):
+        if self.__logger.isEnabledFor(2):
             self.__logger.debug('Node #%s: packet %s from node %s has been'
                                 ' received' % (self.__node_id, packet[0],
                                                packet[1][0]))

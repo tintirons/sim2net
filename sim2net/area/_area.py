@@ -18,16 +18,14 @@ Contains an abstract class that should be implemented by all simulation area
 classes.
 """
 
-
 from abc import ABCMeta, abstractmethod, abstractproperty
 
 from sim2net.utility import logger
 
-
 __docformat__ = 'reStructuredText'
 
 
-#pylint: disable=R0921
+# pylint: disable=R0921
 class Area(object):
     """
     This class is an abstract class that should be implemented by all

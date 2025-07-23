@@ -18,9 +18,7 @@ Provides an implementation of a square simulation area in the two-dimensional
 space.
 """
 
-
 from sim2net.area.rectangle import Rectangle
-
 
 __docformat__ = 'reStructuredText'
 

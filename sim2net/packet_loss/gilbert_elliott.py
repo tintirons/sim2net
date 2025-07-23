@@ -60,15 +60,13 @@ whereas :math:`r` equal to :math:`0` means that no transmission is successful
    April 2008.
 """
 
-
 from sim2net.packet_loss._packet_loss import PacketLoss
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 
 
-#pylint: disable=C0103
+# pylint: disable=C0103
 class GilbertElliott(PacketLoss):
     """
     This class implements the Gilbert-Elliott packet loss model.
@@ -85,7 +83,6 @@ class GilbertElliott(PacketLoss):
 
     #: Default value of the `k` parameter.
     __DEFAULT_K = 0.99999900
-
 
     def __init__(self, prhk=None):
         """

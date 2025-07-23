@@ -21,7 +21,6 @@ two-dimensional space.
 from sim2net.area._area import Area
 from sim2net.utility.validation import check_argument_type
 
-
 __docformat__ = 'reStructuredText'
 
 

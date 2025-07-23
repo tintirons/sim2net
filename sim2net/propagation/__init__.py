@@ -28,7 +28,6 @@ received if the receiving node remains connected in this way with the sending
 node at least for the duration of that packet transmission.
 """
 
-
 __docformat__ = 'reStructuredText'
 
 __all__ = ['path_loss']

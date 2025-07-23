@@ -16,14 +16,12 @@
 """
 """
 
-
-from abc import ABCMeta, abstractmethod
-
+from abc import ABCMeta
 
 __docformat__ = 'reStructuredText'
 
 
-#pylint: disable=R0921
+# pylint: disable=R0921
 class Application(object):
     """
     """

@@ -37,12 +37,10 @@ independently of other nodes.
    Dallas, Texas, United States, October 1998.
 """
 
-
 from math import fabs, sqrt
 
 from sim2net.mobility._mobility import Mobility
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 
@@ -146,7 +144,7 @@ class RandomWaypoint(Mobility):
         self._destinations[node_id]['destination'] = \
             self._get_new_destination()
         node_speed.get_new()
-        if self.logger.isEnabledFor('DEBUG'):
+        if self.logger.isEnabledFor(2):
             msg = 'A new destination has been selected for the node #%d:' \
                   ' (%f, %f) with the current speed equal to %f'
             self.logger.debug(
@@ -172,12 +170,12 @@ class RandomWaypoint(Mobility):
         else:
             pause_time = 0.0
             self._destinations[node_id]['pause time'] = None
-        if self.logger.isEnabledFor('DEBUG'):
+        if self.logger.isEnabledFor(2):
             msg = 'The node #%d is now in its destination position (%f, %f)' \
                   ' with the pause time equal to %f'
             self.logger.debug(msg %
-                (node_id, self._destinations[node_id]['destination'][0],
-                self._destinations[node_id]['destination'][1], pause_time))
+                              (node_id, self._destinations[node_id]['destination'][0],
+                               self._destinations[node_id]['destination'][1], pause_time))
         return self._destinations[node_id]['pause time']
 
     def _parallel_trajectory(self, coordinate, destination, step_distance):
@@ -200,10 +198,10 @@ class RandomWaypoint(Mobility):
             (`float`) a current value of the node's coordinate.
         """
         if destination > coordinate \
-           and destination >= coordinate + step_distance:
+                and destination >= coordinate + step_distance:
             return coordinate + step_distance
         if destination < coordinate \
-           and destination < coordinate - step_distance:
+                and destination < coordinate - step_distance:
             return coordinate - step_distance
         return destination
 
@@ -267,7 +265,7 @@ class RandomWaypoint(Mobility):
         horizontal_destination = self._destinations[node_id]['destination'][0]
         vertical_destination = self._destinations[node_id]['destination'][1]
         if node_coordinates[0] == horizontal_destination \
-           and node_coordinates[1] == vertical_destination:
+                and node_coordinates[1] == vertical_destination:
             return (horizontal_destination, vertical_destination)
         step_distance = fabs(node_speed.current) * self._time.simulation_period
         if node_coordinates[0] == horizontal_destination:
@@ -278,8 +276,8 @@ class RandomWaypoint(Mobility):
         if node_coordinates[1] == vertical_destination:
             return \
                 (self._parallel_trajectory(
-                     node_coordinates[0], horizontal_destination,
-                     step_distance),
+                    node_coordinates[0], horizontal_destination,
+                    step_distance),
                  vertical_destination)
         return self._diagonal_trajectory(node_id, node_coordinates,
                                          step_distance)
@@ -299,12 +297,12 @@ class RandomWaypoint(Mobility):
         if self._destinations[node_id]['pause time'] <= 0:
             self._destinations[node_id]['pause time'] = None
         else:
-            if __debug__ and self.logger.isEnabledFor('DEBUG'):
+            if __debug__ and self.logger.isEnabledFor(2):
                 msg = 'The node #%d is still in its destination position' \
                       ' (%f, %f) with the pause time equal to %f'
                 self.logger.debug(msg %
-                    (node_id, node_coordinates[0], node_coordinates[1],
-                     self._destinations[node_id]['pause time']))
+                                  (node_id, node_coordinates[0], node_coordinates[1],
+                                   self._destinations[node_id]['pause time']))
         return self._destinations[node_id]['pause time']
 
     def get_current_position(self, node_id, node_speed, node_coordinates):
@@ -337,17 +335,17 @@ class RandomWaypoint(Mobility):
         coordinates = self._step_move(node_id, node_speed, node_coordinates)
         assert 0 <= coordinates[0] <= self._area.width \
                and 0 <= coordinates[1] <= self._area.height, \
-               'The new coordinates (%f, %f) exceed dimensions of the' \
-               ' simulation area!' % coordinates
+            'The new coordinates (%f, %f) exceed dimensions of the' \
+            ' simulation area!' % coordinates
         if (coordinates[0] == self._destinations[node_id]['destination'][0]
-            and
-            coordinates[1] == self._destinations[node_id]['destination'][1]):
+                and
+                coordinates[1] == self._destinations[node_id]['destination'][1]):
             # print "%.30f    %.30f" % (coordinates[0], coordinates[1])
             if self._assign_new_pause_time(node_id) is not None:
                 self._destinations[node_id]['destination'] = [None, None]
             else:
                 self._assign_new_destination(node_id, node_speed)
-        elif __debug__ and self.logger.isEnabledFor('DEBUG'):
+        elif __debug__ and self.logger.isEnabledFor(2):
             msg = 'The current position of the node #%d is (%f, %f) with the' \
                   ' current speed equal to %f'
             self.logger.debug(msg % (node_id, coordinates[0], coordinates[1],

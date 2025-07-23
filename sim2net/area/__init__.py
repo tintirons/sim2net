@@ -20,7 +20,6 @@ Area expresses a simulation surface by its shape and extent in the
 two-dimensional space with the origin in (0, 0).
 """
 
-
 __docformat__ = 'reStructuredText'
 
 __all__ = ['rectangle', 'square']

@@ -58,9 +58,7 @@ both files as arguments, eg.::
              :mod:`sim2net.application.Application`
 """
 
-
 import argparse
-
 from os.path import join, realpath, split
 from shutil import copy
 from sys import argv, exit, stdout
@@ -68,7 +66,6 @@ from traceback import print_exc
 
 from sim2net._version import get_version, project_information
 from sim2net.simulator import Sim2Net
-
 
 __docformat__ = 'reStructuredText'
 
@@ -97,7 +94,7 @@ def main():
     """
     parser = argparse.ArgumentParser(
         prog='sim2net',
-        usage=\
+        usage= \
             'sim2net [-h | -d | -v | -i DIRECTORY] CONFIGURATION APPLICATION',
         description='%s' % project_information())
     group = parser.add_mutually_exclusive_group()
@@ -134,7 +131,7 @@ def main():
         exit(__POSIX_EXIT_FAILURE)
     args = parser.parse_args()
     if args.description:
-        print __DESCRIPTION
+        print(__DESCRIPTION)
         exit(__POSIX_EXIT_SUCCESS)
     if args.initialize:
         try:
@@ -144,44 +141,47 @@ def main():
             copy(join(base_path, '_application_template.py'),
                  join(vars(args)['initialize'][0], 'application.py'))
             exit(__POSIX_EXIT_SUCCESS)
-        except Exception, err:
-            print '***  [sim2net] CRITICAL - cannot write the files:\n'
+        except Exception as err:
+            print('***  [sim2net] CRITICAL - cannot write the files:\n')
             if __debug__:
                 print_exc(file=stdout)
             else:
-                print err
+                print(err)
             exit(__POSIX_EXIT_FAILURE)
     if args.version:
-        print get_version()
+        print(get_version())
         exit(__POSIX_EXIT_SUCCESS)
     if vars(args)['configuration'] is None \
             or vars(args)['application'] is None:
         parser.print_usage()
-        print 'sim2net: error: expected two arguments'
+        print('sim2net: error: expected two arguments')
         exit(__POSIX_EXIT_FAILURE)
     try:
         configuration = dict()
-        execfile(vars(args)['configuration'], configuration)
+        with open("configuration.py") as f:
+            code = compile(f.read(), "configuration.py", 'exec')
+            exec(code, configuration)
         sim2net = Sim2Net(configuration, vars(args)['application'])
         args = None
         configuration = None
-    except Exception, err:
-        print '***  [sim2net] CRITICAL - cannot initialize the simulator:\n'
+    except Exception as err:
+        print('***  [sim2net] CRITICAL - cannot initialize the simulator:\n')
         if __debug__:
             print_exc(file=stdout)
         else:
-            print err
+            print(err)
         exit(__POSIX_EXIT_FAILURE)
     try:
         sim2net.run()
-    except Exception, err:
-        print '***  [sim2net] CRITICAL - cannot continue:\n'
+    except Exception as err:
+        print('***  [sim2net] CRITICAL - cannot continue:\n')
         if __debug__:
             print_exc(file=stdout)
         else:
-            print err
+            print(err)
         exit(__POSIX_EXIT_FAILURE)
     exit(__POSIX_EXIT_SUCCESS)
+
 
 if __name__ == "__main__":
     main()

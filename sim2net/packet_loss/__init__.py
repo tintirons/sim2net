@@ -24,7 +24,6 @@ networking hardware.  Thus, the purpose of packet loss models is to simulate
 (potential) transmission failures in wireless communication.
 """
 
-
 __docformat__ = 'reStructuredText'
 
 __all__ = ['gilbert_elliott']

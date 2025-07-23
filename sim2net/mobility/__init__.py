@@ -41,7 +41,6 @@ helpful in simulating the motion patterns of a group as a whole.
    Applications*, vol. 2(5), 483--502.  John Wiley & Sons, 2002.
 """
 
-
 __docformat__ = 'reStructuredText'
 
 __all__ = ['gauss_markov', 'nomadic_community', 'random_direction',

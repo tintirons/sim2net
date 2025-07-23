@@ -17,9 +17,7 @@
 Provides a pseudo-random number generator.
 """
 
-
 import random
-
 
 __docformat__ = 'reStructuredText'
 

@@ -21,7 +21,6 @@ number of nodes deployed in the area.  It provides also node positions in case
 of static networks or initial node positions for mobile environments.
 """
 
-
 __docformat__ = 'reStructuredText'
 
 __all__ = ['grid', 'normal', 'uniform']

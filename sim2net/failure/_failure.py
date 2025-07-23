@@ -18,17 +18,15 @@ Contains an abstract class that should be implemented by all process failure
 model classes.
 """
 
-
 from abc import ABCMeta, abstractmethod
 
 from sim2net.utility import logger
 from sim2net.utility.randomness import get_random_generator
 
-
 __docformat__ = 'reStructuredText'
 
 
-#pylint: disable=R0921
+# pylint: disable=R0921
 class Failure(object):
     """
     This class is an abstract class that should be implemented by all process

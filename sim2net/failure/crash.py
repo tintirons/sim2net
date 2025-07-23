@@ -27,17 +27,15 @@ beginning of the simulation), during which process failures do not occur, and
 the total number of faulty processes can also be limited to a given value.
 """
 
-
 import operator
 
 from sim2net.failure._failure import Failure
 from sim2net.utility.validation import check_argument_type
 
-
 __docformat__ = 'reStructuredText'
 
 
-#pylint: disable=R0913
+# pylint: disable=R0913
 class Crash(Failure):
     """
     This class implements the process crash model.

@@ -21,10 +21,8 @@ a given number of nodes are placed over it with the uniform probability
 distribution.
 """
 
-
 from sim2net.placement._placement import Placement
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 
@@ -74,10 +72,10 @@ class Uniform(Placement):
         while True:
             horizontal_coordinates = \
                 [self.random_generator.uniform(0, self.__area.width)
-                    for coordinate in range(0, self.__nodes_number)]
+                 for coordinate in range(0, self.__nodes_number)]
             vertical_coordinates = \
                 [self.random_generator.uniform(0, self.__area.height)
-                    for coordinate in range(0, self.__nodes_number)]
+                 for coordinate in range(0, self.__nodes_number)]
             if Placement.position_conflict(horizontal_coordinates,
                                            vertical_coordinates) == -1:
                 break

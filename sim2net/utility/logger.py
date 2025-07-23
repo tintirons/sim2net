@@ -18,9 +18,7 @@ Provides functions which implement an event logging system with the use of the
 :mod:`logging` module from the standard library.
 """
 
-
 import logging
-
 
 __docformat__ = 'reStructuredText'
 
@@ -48,7 +46,6 @@ class Sim2NetFormatter(logging.Formatter):
     #: Default date and time format for logs.
     __DEFAULT_DATETIME_FORMAT = '%d/%m/%Y %H:%M:%S'
 
-
     def __init__(self, time=None):
         """
         *Parameters*:
@@ -60,7 +57,7 @@ class Sim2NetFormatter(logging.Formatter):
         logging.Formatter. \
             __init__(self,
                      fmt=Sim2NetFormatter.__DEFAULT_LOGGING_FORMAT,
-                     datefmt = Sim2NetFormatter.__DEFAULT_DATETIME_FORMAT)
+                     datefmt=Sim2NetFormatter.__DEFAULT_DATETIME_FORMAT)
 
     def format(self, record):
         """
@@ -79,6 +76,7 @@ def __channel_string(channel):
     Returns a logging channel string for a given string.
     """
     return __MAIN_LOGGING_CHANNEL + '.' + str(channel).lower()
+
 
 def create_logger(time=None, level=None, handler=None, formatter=None):
     """
@@ -119,6 +117,7 @@ def create_logger(time=None, level=None, handler=None, formatter=None):
     global __CREATED
     __CREATED = True
     return logging.getLogger(__MAIN_LOGGING_CHANNEL)
+
 
 def get_logger(channel=None):
     """

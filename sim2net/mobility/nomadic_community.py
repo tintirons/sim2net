@@ -27,13 +27,11 @@ begin roaming around it.  The whole process is repeated again and again until
 simulation ends.
 """
 
-
 from math import fabs
 
 from sim2net.mobility._mobility import Mobility
 from sim2net.mobility.random_waypoint import RandomWaypoint
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 
@@ -76,7 +74,6 @@ class NomadicCommunity(RandomWaypoint, Mobility):
     #: The maximum value of the range for the pause time used to determine the
     #: reference point change time.
     __DEFAULT_MAXIMUM_RELOCATION_PAUSE_TIME = 10.0
-
 
     def __init__(self, area, time, initial_coordinates, pause_time=0.0,
                  area_factor=0.25):
@@ -201,7 +198,7 @@ class NomadicCommunity(RandomWaypoint, Mobility):
                                                self._area.height))
             new_edges = self.__get_free_roam_area_edges(reference_point)
             if new_edges[2] > edges[0] or new_edges[3] > edges[1] \
-               or new_edges[0] < edges[2] or new_edges[1] < edges[3]:
+                    or new_edges[0] < edges[2] or new_edges[1] < edges[3]:
                 break
         self.logger.debug('New coordinates of the reference point has been' \
                           ' selected: (%f, %f)' % (reference_point[0],
@@ -218,8 +215,8 @@ class NomadicCommunity(RandomWaypoint, Mobility):
                 NomadicCommunity.__DEFAULT_MINIMUM_RELOCATION_TIME,
                 NomadicCommunity.__DEFAULT_MAXIMUM_RELOCATION_TIME) \
             + (self.random_generator.uniform(
-                   NomadicCommunity.__DEFAULT_MINIMUM_RELOCATION_PAUSE_TIME,
-                   NomadicCommunity.__DEFAULT_MAXIMUM_RELOCATION_PAUSE_TIME) \
+                NomadicCommunity.__DEFAULT_MINIMUM_RELOCATION_PAUSE_TIME,
+                NomadicCommunity.__DEFAULT_MAXIMUM_RELOCATION_PAUSE_TIME) \
                * self._pause_time)
         self.logger.debug('New reference point relocation time has been' \
                           ' selected: %f simulation time units'
@@ -288,17 +285,17 @@ class NomadicCommunity(RandomWaypoint, Mobility):
         coordinates = self._step_move(node_id, node_speed, node_coordinates)
         assert 0 <= coordinates[0] <= self._area.width \
                and 0 <= coordinates[1] <= self._area.height, \
-               'The new coordinates (%f, %f) exceed dimensions of the' \
-               ' simulation area!' % coordinates
+            'The new coordinates (%f, %f) exceed dimensions of the' \
+            ' simulation area!' % coordinates
         if (coordinates[0] == self._destinations[node_id]['destination'][0]
-            and
-            coordinates[1] == self._destinations[node_id]['destination'][1]):
+                and
+                coordinates[1] == self._destinations[node_id]['destination'][1]):
             if not self._destinations[node_id]['on site']:
                 edges = self.__get_free_roam_area_edges(self.__reference_point)
                 if coordinates[0] >= edges[3] \
-                   and coordinates[0] <= edges[1] \
-                   and coordinates[1] >= edges[2] \
-                   and coordinates[1] <= edges[0]:
+                        and coordinates[0] <= edges[1] \
+                        and coordinates[1] >= edges[2] \
+                        and coordinates[1] <= edges[0]:
                     self._destinations[node_id]['on site'] = True
             if self._assign_new_pause_time(node_id) is not None:
                 self._destinations[node_id]['destination'] = [None, None]
@@ -309,4 +306,6 @@ class NomadicCommunity(RandomWaypoint, Mobility):
                   ' current speed equal to %f'
             self.logger.debug(msg % (node_id, coordinates[0], coordinates[1],
                                      fabs(node_speed.current)))
+        print("%.30f    %.30f    %.30f    %.30f" % (
+        coordinates[0], coordinates[1], self.__reference_point[0], self.__reference_point[1]))
         return coordinates

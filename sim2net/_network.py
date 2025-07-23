@@ -28,12 +28,10 @@ Additionally, the :class:`sim2net._network._Communication` class is
 implemented, which serves as a communication interface for the simulated nodes.
 """
 
-
 from copy import deepcopy
 
 from sim2net._channel import Channel
 from sim2net.utility import logger
-
 
 __docformat__ = 'reStructuredText'
 
@@ -106,7 +104,7 @@ class Network(object):
             for key in Network.__ENVIRONMENT:
                 if environment[key] is None:
                     raise KeyError(key)
-        except KeyError, err:
+        except KeyError as err:
             self.__logger.critical('No settings given for "%s" parameter!'
                                    % err)
             raise
@@ -117,7 +115,7 @@ class Network(object):
         self.__network['propagation'] = environment['propagation']
         self.__network['failure'] = environment['failure']
         # NODES
-        self.__nodes_number = len(environment['initial_coordinates'])
+        self.__nodes_number = len(tuple(environment['initial_coordinates']))
         self.__nodes = dict()
         self.__nodes['coordinates'] = environment['initial_coordinates']
         self.__nodes['speed'] = environment['speed']
@@ -127,16 +125,16 @@ class Network(object):
         self.__nodes['channel'] = \
             [Channel(self.__network['time'], environment['packet_loss'][node],
                      node, environment['maximum_transmission_time'])
-                for node in range(0, self.__nodes_number)]
+             for node in range(0, self.__nodes_number)]
         self.__nodes['communication'] = \
             [_Communication(node, self.communication_send,
                             self.communication_receive)
-                for node in range(0, self.__nodes_number)]
+             for node in range(0, self.__nodes_number)]
         self.__nodes['failure'] = [False] * self.__nodes_number
         self.__network['shared'] = dict()
         self.__nodes['application'] = \
             [environment['application']()
-                for node in range(0, self.__nodes_number)]
+             for node in range(0, self.__nodes_number)]
         self.__logger.debug('Initializing the "%s" application for %d nodes'
                             % (environment['application'].__name__,
                                self.__nodes_number))

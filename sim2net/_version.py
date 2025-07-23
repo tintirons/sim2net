@@ -34,7 +34,6 @@ way:
   maintenance number is incremented (and there are no resets).
 """
 
-
 __docformat__ = 'reStructuredText'
 
 #: The project name.
@@ -44,7 +43,7 @@ __PROJECT_NAME = 'Simple Network Simulator'
 __PROJECT_SHORT_NAME = 'sim2net'
 
 #: The version number.
-__VERSION_NUMBER = '3.1.3'  # apply also to the README.rst and setup.py files
+__VERSION_NUMBER = '3.1.2'  # apply also to the README.rst and setup.py files
 
 
 def get_version():
@@ -52,6 +51,7 @@ def get_version():
     Returns the current version number as a string.
     """
     return __VERSION_NUMBER
+
 
 def project_information():
     """

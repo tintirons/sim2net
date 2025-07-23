@@ -23,12 +23,10 @@ range of each other, the **signal-to-noise ratio** (*SNR*) is above the minimal
 usable level, and hence, the nodes are able to communicate directly.
 """
 
-
 from math import pow, sqrt
 
 from sim2net.propagation._propagation import Propagation
 from sim2net.utility.validation import check_argument_type
-
 
 __docformat__ = 'reStructuredText'
 
@@ -82,7 +80,7 @@ class PathLoss(Propagation):
             sqrt(pow(source_coordinates[0] - destination_coordinates[0], 2) \
                  + pow(source_coordinates[1] - destination_coordinates[1], 2))
 
-    def get_neighbors(self, coordinates):
+    def get_neighbors(self, coordinates_list):
         """
         Calculates identifiers of all nodes in a network that would be able to
         receive a wireless signal transmitted from a source node, according to
@@ -115,16 +113,17 @@ class PathLoss(Propagation):
             [[1, 2, 3], [0, 2, 3], [0, 1, 3], [0, 1, 2]]
         """
         neighbors = list()
+        coordinates = tuple(coordinates_list)
         for node in range(0, len(coordinates)):
             neighbors.append(list())
         for source_node in range(0, len(coordinates)):
             for destination_node in range(source_node + 1, len(coordinates)):
                 if self.__distance(coordinates[source_node],
                                    coordinates[destination_node]) \
-                   <= self.__transmission_range:
+                        <= self.__transmission_range:
                     neighbors[source_node].append(destination_node)
                     neighbors[destination_node].append(source_node)
-        if __debug__ and self.logger.isEnabledFor('DEBUG'):
-            self.logger.debug('Neighboring nodes has been computed for %d' \
-                              ' nodes' % len(coordinates))
+        # if __debug__ and self.logger.isEnabledFor('DEBUG'):
+        #     self.logger.debug('Neighboring nodes has been computed for %d' \
+        #                       ' nodes')
         return neighbors
